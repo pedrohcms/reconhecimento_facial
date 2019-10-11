@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Program Files (x86)\\Python\\Python-Reconhecimento-Facial\\Scripts\\python.exe"
+    "python.pythonPath": "C:\\Users\\Pedro Silva\\AppData\\Local\\Programs\\reconhecimento-facial\\Scripts\\python.exe",
+    "python.linting.enabled": false
 }

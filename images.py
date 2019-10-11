@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 import cv2
 
 #Tira as fotos para que a rede neural possa reconhece-las mais tarde
@@ -12,6 +14,9 @@ def take_picture(name):
             print('Erro')
             break
 
+        #TRESH_TRUNC foi o melhor filtro encontrado, no entanto deve haver um muito melhor
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #Transformamos a imagem em escala de cinza
+        #ret, frame = cv2.threshold(frame, 127, 255, cv2.THRESH_TRUNC) #Aplicamos a binarização
         cv2.imshow('frame', frame)
 
         k = cv2.waitKey(10)
