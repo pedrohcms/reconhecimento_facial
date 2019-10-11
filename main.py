@@ -13,18 +13,15 @@ while op != 0:
     if op == 1:
         name = input('Entre com o nome do usuário: ')
         name = name.lower()
-
-        folder = './users/'
-        
-        if not os.path.isdir(folder):
-            os.mkdir(folder)
-        
+            
         folder = './users/'+name
         
         if not os.path.isdir(folder):
             os.mkdir(folder)
-            
-        images.take_picture(name)
+                
+            images.take_picture(name)
+        else:
+            print('Usuário já cadastrado! ')
         
     elif op == 2:
         print('Reconhecendo usuario')
