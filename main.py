@@ -3,6 +3,12 @@
 import os
 import images
 
+def process_name(name):
+   name = name.strip()
+   name = name.upper()
+   name = name.replace(' ','_')
+   return name
+
 op = 1
 
 while op != 0:
@@ -14,7 +20,7 @@ while op != 0:
 
     if op == 1:
         name = input('Entre com o nome do usuário: ')
-        name = name.lower()
+        name = process_name(name)   
 
         folder = './users'
 
