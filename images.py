@@ -15,10 +15,11 @@ def take_picture(name):
             break
 
         #TRESH_TRUNC foi o melhor filtro encontrado, no entanto deve haver um muito melhor
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #Transformamos a imagem em escala de cinza
         #ret, frame = cv2.threshold(frame, 127, 255, cv2.THRESH_TRUNC) #Aplicamos a binarização
         cv2.imshow('frame', frame)
 
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #Transformamos a imagem em escala de cinza
+        
         k = cv2.waitKey(10)
 
         if k == 27:
