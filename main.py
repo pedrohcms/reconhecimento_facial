@@ -44,11 +44,11 @@ while op != 0:
             print('User already registered! ')
 
     elif op == 2:
-
         print('Recognizing user')
+        
     elif op == 0:
-
         print('Exit')
         break
+
     else:
         print('Invalid option')
