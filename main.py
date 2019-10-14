@@ -1,4 +1,5 @@
 # -*- coding: utf8 -*-
+#Author: Pedro Henrique Correa Mota da Silva
 
 import os
 import images
@@ -12,14 +13,14 @@ def process_name(name):
 op = 1
 
 while op != 0:
-    print('Digite 1 para cadastrar ')
-    print('Digite 2 para reconhecer ')
-    print('Digite 0 para sair ')
+    print('Press 1 to register ')
+    print('Press 2 to activate recognition ')
+    print('Press 0 to exit ')
 
     op = int(input())
 
     if op == 1:
-        name = input('Entre com o nome do usuário: ')
+        name = input('Enter username: ')
         name = process_name(name)   
 
         folder = './users'
@@ -30,23 +31,24 @@ while op != 0:
         folder = './users/'+name
         
         if not os.path.isdir(folder):
-            os.mkdir(folder) #Cria o diretório em que as imagens do usuário serão salvas
-            print('Pressione a tecla s para tirar uma foto')   
-            print('Pressione a tecla Esc para terminar de fotografar')
-            images.take_picture(name) #Invoca a função que fotografa e salva as imagens do usuário
+            os.mkdir(folder) #Create the directory that stores the user's images
+            print('Press s key to take a picture')   
+            print('Press Esc key to finish shooting')
+            print('Please note that at least one photo is required for registration')
+            images.take_picture(name) #Invokes the function that take pictures and save user's imagem
             
             if len(os.listdir(folder)) == 0:
-                print('Erro ao cadastrar usuário: '+name+', tente novamente')
-                os.rmdir(folder) #Removemos a pasta que foi criada caso o usuário não se cadastre corretamente
+                print('Error registering user: '+ name+', try again')
+                os.rmdir(folder) #We removed the folder that was created if the user does not register correctly
         else:
-            print('Usuário já cadastrado! ')
+            print('User already registered! ')
 
     elif op == 2:
 
-        print('Reconhecendo usuario')
+        print('Recognizing user')
     elif op == 0:
 
-        print('Saindo')
+        print('Exit')
         break
     else:
-        print('Opção inválida')
+        print('Invalid option')
