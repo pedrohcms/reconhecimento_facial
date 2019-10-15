@@ -19,13 +19,12 @@ def take_picture(name):
         #ret, frame = cv2.threshold(frame, 127, 255, cv2.THRESH_TRUNC) #We apply binarization
         cv2.imshow('frame', frame)
 
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #We transform the image to grayscale
-        
         k = cv2.waitKey(10)
 
         if k == 27:
             break
         elif k == ord('s'):
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #We transform the image to grayscale
             #Here we save the image in the directory, with the format: username_index
             cv2.imwrite('./users/'+name+'/'+name+'_'+str(index)+'.jpeg', frame)
             index += 1
