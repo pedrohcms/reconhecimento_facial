@@ -3,6 +3,10 @@
 
 import os
 import images
+import cv2
+from intelligence import train_neural_network, CATEGORIES
+from tensorflow.keras.models import load_model
+import numpy as np
 
 def process_name(name):
    name = name.strip()
@@ -44,7 +48,61 @@ while op != 0:
             print('User already registered! ')
 
     elif op == 2:
-        print('Recognizing user')
+        
+        if not os.path.isdir('backup'):
+            train_neural_network()
+        
+        model = load_model(os.path.join('backup', 'model.h5'))
+        
+        print(model)
+
+        frame = cv2.imread('teste/pedro.jpeg')
+        frame = np.array(frame).reshape(-1, 640, 480, 1)
+        frame = frame/255.0
+        prediction = model.predict(frame)
+        print(prediction)
+        print(CATEGORIES[int(prediction[0][0])])
+
+        frame = cv2.imread('teste/gu.jpeg')
+        frame = np.array(frame).reshape(-1, 640, 480, 1)
+        frame = frame/255.0
+        prediction = model.predict(frame)
+        print(prediction)
+        print(CATEGORIES[int(prediction[0][0])])
+
+        frame = cv2.imread('teste/dri.jpeg')
+        frame = np.array(frame).reshape(-1, 640, 480, 1)
+        frame = frame/255.0
+        prediction = model.predict(frame)
+        print(prediction)
+        print(CATEGORIES[int(prediction[0][0])])
+
+        # cap = cv2.VideoCapture(0)
+
+        # while True:    
+        #     ret, frame = cap.read()
+
+        #     if not ret:
+        #         print('Error')
+        #         break
+
+        #     cv2.imshow('frame', frame)
+
+        #     frame = np.array(frame).reshape(-1, 640, 480, 1)
+
+        #     frame = frame/255.0
+
+        #     prediction = model.predict([frame])            
+
+        #     print(CATEGORIES[int(prediction[0][0])])
+
+        #     k = cv2.waitKey(10)
+
+        #     if k == 27:
+        #         break
+        
+        # cap.release()
+        # cv2.destroyAllWindows()
         
     elif op == 0:
         print('Exit')
