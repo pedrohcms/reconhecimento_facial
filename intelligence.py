@@ -10,7 +10,7 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
 
-CATEGORIES = ['ADRIANA_DE_CASSIA_CORREA_MOTA_DA_SILVA', 'GUSTAVO_ALEXANDRE_MOIMAZ_COSTA', 'PEDRO_HENRIQUE_CORREA_MOTA_DA_SILVA']
+CATEGORIES = os.listdir('users')
 
 #Load the images from the users folder and create the data for model training
 def create_training_data():
@@ -38,8 +38,10 @@ def create_training_data():
         y.append(label)
     
     X = np.array(X).reshape(-1, 640, 480, 1)
-    y = tf.one_hot(y, len(CATEGORIES))#Cria um tensor que contem todas as labels para ser passada a model
+    X = X/255.0
 
+    y = np.array(y)
+    
     os.mkdir('backup')#Criamos uma pasta para receber o backup dos datasets
 
     data_file = open(os.path.join('backup', 'data.pickle'), "wb")
@@ -58,28 +60,37 @@ def train_neural_network():
     X = pickle.load(open(os.path.join('backup', 'data.pickle'), "rb"))
     y = pickle.load(open(os.path.join('backup', 'labels.pickle'), "rb"))
 
-    X = X/255.0
-
     model = Sequential()
-    model.add(Conv2D(64, (3,3), input_shape=X.shape[1:]))
+    
+    model.add(Conv2D(128, (3,3), input_shape= X.shape[1:]))
     model.add(Activation("relu"))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(MaxPooling2D(pool_size=(3, 3)))
 
-    model.add(Conv2D(64, (3,3)))
+    model.add(Conv2D(128, (3,3)))
     model.add(Activation("relu"))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(MaxPooling2D(pool_size=(3, 3)))
+
+    model.add(Conv2D(128, (3,3)))
+    model.add(Activation("relu"))
+    model.add(MaxPooling2D(pool_size=(3, 3)))
+
+    model.add(Conv2D(128, (3,3)))
+    model.add(Activation("relu"))
+    model.add(MaxPooling2D(pool_size=(3, 3)))
 
     model.add(Flatten())
-    model.add(Dense(64))
+    model.add(Dense(128))
 
-    model.add(Dense(1))
+    model.add(Dense(len(CATEGORIES)))
     model.add(Activation('sigmoid'))
 
-    model.compile(loss="categorical_crossentropy",
+    #sparse_categorical_crossentropy será usada quando tivermos mais de duas pessoas
+    #utilizei binary_crossentropy pois só tinha duas classes diferentes
+    model.compile(loss="sparse_categorical_crossentropy",
                  optmizer="adam",
                  metrics=['accuracy'])
 
-    model.fit(X, y, batch_size=2, epochs=5, validation_split=0.2)
-
+    model.fit(X, y, batch_size=6, epochs=5, validation_split=0.2)
+    
     #Here we make the backup of the neural network
     model.save(os.path.join('backup', 'model.h5'))
