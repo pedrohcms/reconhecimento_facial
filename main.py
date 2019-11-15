@@ -3,9 +3,11 @@
 
 import os
 import images
+
 from intelligence import train_neural_network, CATEGORIES
 from tensorflow.keras.models import load_model
 import cv2
+
 import numpy as np
 
 def process_name(name):

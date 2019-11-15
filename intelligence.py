@@ -8,7 +8,7 @@ import random
 import pickle
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
 
 CATEGORIES = os.listdir('users')
 
@@ -29,7 +29,7 @@ def create_training_data():
                 print(e)
     
     random.shuffle(training_data)
-
+    
     X = []
     y = []
 
@@ -61,6 +61,7 @@ def train_neural_network():
     y = pickle.load(open(os.path.join('backup', 'labels.pickle'), "rb"))
 
     model = Sequential()
+    
     model.add(Conv2D(128, (3,3), input_shape= X.shape[1:]))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(3, 3)))
@@ -90,5 +91,6 @@ def train_neural_network():
                  metrics=['accuracy'])
 
     model.fit(X, y, batch_size=6, epochs=5, validation_split=0.2)
-
+    
+    #Here we make the backup of the neural network
     model.save(os.path.join('backup', 'model.h5'))
