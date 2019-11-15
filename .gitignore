@@ -3,3 +3,4 @@
 *.pickle
 *.pyc
 *.jpeg
+backup/model.h5

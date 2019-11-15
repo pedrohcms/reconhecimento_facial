@@ -10,16 +10,17 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 
+CATEGORIES = os.listdir('users')
+
 #Load the images from the users folder and create the data for model training
 def create_training_data():
     
     dirs = './users/'
-    categories = ['GUSTAVO_ALEXANDRE_MOIMAZ_COSTA', 'PEDRO_HENRIQUE_CORREA']
     training_data = []
 
-    for category in categories:
+    for category in CATEGORIES:
         path = os.path.join(dirs, category)
-        label = categories.index(category)
+        label = CATEGORIES.index(category)
         for img in os.listdir(path):
             try:
                 img = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
@@ -29,20 +30,17 @@ def create_training_data():
     
     random.shuffle(training_data)
 
-    return training_data
-
-def create_network_data():
-    
-    data = create_training_data()
     X = []
     y = []
 
-    for features, label in data:
+    for features, label in training_data:
         X.append(features)
         y.append(label)
     
-    X = np.array(X, dtype=np.uint8).reshape(-1, 640, 480, 1)
-    y = np.array(y, dtype=np.uint8)
+    X = np.array(X).reshape(-1, 640, 480, 1)
+    X = X/255.0
+
+    y = np.array(y)
     
     os.mkdir('backup')#Criamos uma pasta para receber o backup dos datasets
 
@@ -57,34 +55,40 @@ def create_network_data():
 def train_neural_network():
     
     if not os.path.isdir('backup'):
-        create_network_data()
+        create_training_data()
 
     X = pickle.load(open(os.path.join('backup', 'data.pickle'), "rb"))
     y = pickle.load(open(os.path.join('backup', 'labels.pickle'), "rb"))
 
-    X = X/255.0
-
     model = Sequential()
-    model.add(Conv2D(64, (3,3), input_shape= X.shape[1:]))
+    model.add(Conv2D(128, (3,3), input_shape= X.shape[1:]))
     model.add(Activation("relu"))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(MaxPooling2D(pool_size=(3, 3)))
 
-    model.add(Conv2D(64, (3,3)))
+    model.add(Conv2D(128, (3,3)))
     model.add(Activation("relu"))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(MaxPooling2D(pool_size=(3, 3)))
+
+    model.add(Conv2D(128, (3,3)))
+    model.add(Activation("relu"))
+    model.add(MaxPooling2D(pool_size=(3, 3)))
+
+    model.add(Conv2D(128, (3,3)))
+    model.add(Activation("relu"))
+    model.add(MaxPooling2D(pool_size=(3, 3)))
 
     model.add(Flatten())
-    model.add(Dense(64))
+    model.add(Dense(128))
 
-    model.add(Dense(1))
+    model.add(Dense(len(CATEGORIES)))
     model.add(Activation('sigmoid'))
 
     #sparse_categorical_crossentropy será usada quando tivermos mais de duas pessoas
     #utilizei binary_crossentropy pois só tinha duas classes diferentes
-    model.compile(loss="binary_crossentropy",
+    model.compile(loss="sparse_categorical_crossentropy",
                  optmizer="adam",
                  metrics=['accuracy'])
 
-    model.fit(X, y, batch_size=2, epochs=5, validation_split=0.5)
+    model.fit(X, y, batch_size=6, epochs=5, validation_split=0.2)
 
-train_neural_network()
+    model.save(os.path.join('backup', 'model.h5'))
