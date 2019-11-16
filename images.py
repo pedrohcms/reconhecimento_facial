@@ -3,11 +3,14 @@
 
 import cv2
 import os
+import time
 
 #Take the photos so the neural network can recognize them later
 def take_picture(name):
     cap = cv2.VideoCapture(0)
     index = 0
+
+    init_time = time.time()
 
     while True:    
         ret, frame = cap.read()
@@ -29,7 +32,11 @@ def take_picture(name):
 
         k = cv2.waitKey(10)
 
-        if k == 27:
+        end_time = time.time()
+
+        print(end_time - init_time)
+        
+        if end_time - init_time >= 60:
             break
         
     cap.release()

@@ -3,11 +3,9 @@
 
 import os
 import images
-
 from intelligence import train_neural_network, CATEGORIES
 from tensorflow.keras.models import load_model
 import cv2
-
 import numpy as np
 
 def process_name(name):
@@ -38,9 +36,6 @@ while op != 0:
         
         if not os.path.isdir(folder):
             os.mkdir(folder) #Create the directory that stores the user's images
-            print('Press s key to take a picture')   
-            print('Press Esc key to finish shooting')
-            print('Please note that at least one photo is required for registration')
             images.take_picture(name) #Invokes the function that take pictures and save user's imagem
             
             if len(os.listdir(folder)) == 0:
