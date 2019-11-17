@@ -11,6 +11,7 @@ def process_name(name):
    return name
 
 def foto_Click():
+    print(var.get()) # exemplo para puxar o valor do options 
     name = campo.get()
     name = process_name(name)   
 
@@ -30,7 +31,7 @@ def foto_Click():
             os.rmdir(folder) #We removed the folder that was created if the user does not register correctly
     else:
         print('User already registered! ')
-    
+   
     conf = Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
 #pqp.place(x=10, y=10)
     conf.pack(side=TOP, fill=X)    
@@ -57,12 +58,12 @@ bt.place(x=20, y=300)
 
 #=====================OPÇÕES=======================
 #prioridade 1= qualquer pessoa, 2= dirigentes 3= ministro 
-prioridadeLista = ["1","2","3"]
-pri = StringVar()
-pri.set(prioridadeLista[0])
+var = StringVar()
+var.set("1")
 
-pri = OptionMenu(janela, pri, *prioridadeLista)
+pri = OptionMenu(janela, var, "1","2","3") 
 pri.place(x=170, y=250)
+
 #====================/OPÇÕES=======================
 janela.mainloop()
 
