@@ -11,4 +11,6 @@ try:
     print("Database connected!")
 
 except expression as identifier:
-    print("COnnection failed.")
+    print("Connection failed.")
+
+#parameters for cloud db connection
