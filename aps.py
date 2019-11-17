@@ -1,17 +1,22 @@
 #coding: utf8
 from tkinter import* #importa toda a biblioteca
 import tkinter
+
 #==============Function_cadastra 1==============
 
 def cadastra_Click ():
-    print("vai colocar a função aqui")
+    import cadastro
+    #cadastro.janela
+    #janela.destroy()
+    #sys.exit()
 
 #==============/Fuunction_cadastra 1==============
 
 #==============Function autentica 2==============
 
 def autentica_Click ():
-    print("vai colocar a função aqui")
+    import autentica
+    #print("vai colocar a função aqui")
 
 #==============/Function autentica 2==============
 
@@ -41,9 +46,9 @@ bt = Button(janela, width = 50, text = "Autenticar", command = autentica_Click )
 bt.place(x=20, y=200)
 #===============/Botão 2=================
 
-#===============Botão 1=================
+#===============Botão 3=================
 
 bt = Button(janela, width = 50, text = "Fechar Aplicação", command = fecha_Click )
 bt.place(x=20, y=300)
-#===============/Botão 1=================
+#===============/Botão 3=================
 janela.mainloop()
