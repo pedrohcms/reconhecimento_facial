@@ -36,7 +36,7 @@ def take_picture(name):
 
         print(end_time - init_time)
         
-        if end_time - init_time >= 60:
+        if end_time - init_time >= 20:
             break
         
     cap.release()

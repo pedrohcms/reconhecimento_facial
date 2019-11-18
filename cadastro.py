@@ -1,6 +1,5 @@
 #coding: utf8
-from tkinter import* #importa toda a biblioteca
-import tkinter
+import tkinter as tk
 import os
 import images
 
@@ -32,39 +31,37 @@ def foto_Click():
     else:
         print('User already registered! ')
    
-    conf = Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
+    conf = tk.Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
 #pqp.place(x=10, y=10)
-    conf.pack(side=TOP, fill=X)    
+    conf.pack(side='top', fill='x')    
     print(campo.get())
-janela = tkinter.Tk()
+janela = tk.Tk()
 janela.title("Sistema de Cadastro") #titulo janela
 
 # Organização da janela lxA+E+T
 janela.geometry("400x500+500+100")
-Label (janela, text="Sistema de Cadastro").pack()
+tk.Label(janela, text="Sistema de Cadastro").pack()
 
 #=====================CAMPO========================
-campo = Entry(janela, width=60)
+campo = tk.Entry(janela, width=60)
 campo.place(x=15, y=200)
 
-lb = Label (janela, text="Para realizar Cadastro, insira seu nome, sua prioridade e tire a foto ")
+lb = tk.Label(janela, text="Para realizar Cadastro, insira seu nome, sua prioridade e tire a foto ")
 lb.place(x=20, y=150)
 #=====================/CAMPO=======================
 
 #=====================BOTÃO========================
-bt = Button(janela, width = 50, text = "Tirar a foto", command = foto_Click)
+bt = tk.Button(janela, width = 50, text = "Tirar a foto", command = foto_Click)
 bt.place(x=20, y=300)
 #=====================/BOTÃO=======================
 
 #=====================OPÇÕES=======================
 #prioridade 1= qualquer pessoa, 2= dirigentes 3= ministro 
-var = StringVar()
+var = tk.StringVar()
 var.set("1")
 
-pri = OptionMenu(janela, var, "1","2","3") 
+pri = tk.OptionMenu(janela, var, "1","2","3") 
 pri.place(x=170, y=250)
 
 #====================/OPÇÕES=======================
 janela.mainloop()
-
-
