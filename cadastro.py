@@ -2,6 +2,7 @@
 import tkinter as tk
 import os
 import images
+from db_interaction import crud
 
 def process_name(name):
    name = name.strip()
@@ -10,21 +11,22 @@ def process_name(name):
    return name
 
 def foto_Click():
-    print(var.get()) # exemplo para puxar o valor do options 
     name = campo.get()
-    name = process_name(name)   
+    label = process_name(name)   
 
-    folder = './users'
+    folder = 'users'
 
     if not os.path.isdir(folder):
         os.mkdir(folder)
             
-    folder = './users/'+name
+    folder = os.path.join('users', label)
         
     if not os.path.isdir(folder):
         os.mkdir(folder) #Create the directory that stores the user's images
-        images.take_picture(name) #Invokes the function that take pictures and save user's imagem
-            
+        images.take_pictures(label) #Invokes the function that take pictures and save user's imagem
+
+        crud.insert_record(name, var.get(), label)
+
         if len(os.listdir(folder)) == 0:
             print('Error registering user: '+ name+', try again')
             os.rmdir(folder) #We removed the folder that was created if the user does not register correctly
