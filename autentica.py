@@ -2,27 +2,13 @@
 import tkinter as tk
 import os
 import cv2
-import intelligence
+from intelligence import recognize_user
+from images import take_photo
 
 def autentica_Click():
+    frame = take_photo()
     
-    cap = cv2.VideoCapture(0)
-
-    while True:
-        ret, frame = cap.read()
-
-        if not ret:
-            print('Error')
-            break
-
-        cv2.imshow('frame', frame)
-
-        if cv2.waitKey(10) == ord('s'):
-            user = intelligence.recognize_user(frame)
-            break
-            
-    cap.release()
-    cv2.destroyAllWindows()
+    user = recognize_user(frame)
     
     redirect_user(user)
 
@@ -41,7 +27,7 @@ lb.place(x=130, y=150)
 #================/LABEL==============
 
 #=====================BOTÃO========================
-bt = tk.Button(janela, width = 50, text = "Analisar Foto", command = autentica_Click)
+bt = tk.Button(janela, width = 50, text = "Tirar a foto", command = autentica_Click)
 bt.place(x=20, y=200)
 #=====================/BOTÃO=======================
 janela.mainloop()
