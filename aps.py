@@ -1,22 +1,22 @@
 #coding: utf8
 import tkinter as tk
 import sys
+from cadastro import Cadastro
+from autentica import autenticacao
 
 #==============Function_cadastra 1==============
 
 def cadastra_Click ():
-    import cadastro
-    #cadastro.janela
-    #janela.destroy()
-    #sys.exit()
+    Cadastro()
+    
 
 #==============/Fuunction_cadastra 1==============
 
 #==============Function autentica 2==============
 
 def autentica_Click ():
-    import autentica
-    #print("vai colocar a função aqui")
+    autenticacao()
+    
 
 #==============/Function autentica 2==============
 
