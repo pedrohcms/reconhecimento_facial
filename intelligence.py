@@ -7,8 +7,9 @@ import numpy as np
 import random
 import pickle
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
+from db_interaction import crud
 
 CATEGORIES = os.listdir('users')
 
@@ -94,3 +95,23 @@ def train_neural_network():
     
     #Here we make the backup of the neural network
     model.save(os.path.join('backup', 'model.h5'))
+
+def recognize_user(frame):
+
+    if not os.path.isdir('backup'):
+        train_neural_network()
+
+    model = load_model(os.path.join('backup', 'model.h5'))
+
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    frame = np.array(frame).reshape(-1, 640, 480, 1)
+    frame = frame/255
+
+    result = model.predict([frame])
+
+    result = CATEGORIES[int(np.argmax(result))]
+
+    result = crud.select_record(result)
+    
+    return result
