@@ -32,6 +32,6 @@ Os módulos `aps.py`, `cadastro.py` e `autentica.py` são interfaces gráficas q
 | Integrantes | Github | Papel |
 |--|--|--|
 | Gustavo Alexandre Moimaz Costa | [https://github.com/gustavoamc](https://github.com/gustavoamc) | Banco de Dados |
-| Henler |  | Documentação da APS |
-| José Roberto  | [https://github.com/joseadolfodesigner](https://github.com/joseadolfodesigner) | Interface Gráfica |
+| Henler Mendes Pio Soares |  | Documentação da APS |
+| José Roberto Adolfo Júnior | [https://github.com/joseadolfodesigner](https://github.com/joseadolfodesigner) | Interface Gráfica |
 | Pedro Henrique Correa Mota da Silva | [https://github.com/pedrohcms](https://github.com/pedrohcms) | Rede Neural |
