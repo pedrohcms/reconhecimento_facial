@@ -1,5 +1,4 @@
 import psycopg2
-
 DB_NAME = "chmahdbn"
 DB_USER = "chmahdbn"
 DB_PASS = "5Mi_DUa8WTwqrYPxExWLhb59Iegz8QU2"
@@ -16,7 +15,7 @@ try:
     conn = psycopg2.connect(database = DB_NAME, user = DB_USER, password = DB_PASS, host = DB_HOST, port = DB_PORT)
     print("Database connected!")
 
-except expression as identifier:
+except Exception as error:
     print("Connection failed.")
 
 #parameters for cloud db connection
