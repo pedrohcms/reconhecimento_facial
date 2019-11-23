@@ -11,11 +11,14 @@ from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
 from db_interaction import crud
 
+if not os.path.isdir('users'):
+    os.mkdir('users')
+
 CATEGORIES = os.listdir('users')
 
 #Load the images from the users folder and create the data for model training
 def create_training_data():
-    
+
     dirs = './users/'
     training_data = []
 
