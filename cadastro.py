@@ -31,7 +31,6 @@ def Cadastro():
             crud.insert_record(name, var.get(), label)
 
             conf = tk.Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
-            #pqp.place(x=10, y=10)
             conf.pack(side='top', fill='x')    
             print(campo.get())
 

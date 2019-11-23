@@ -2,6 +2,7 @@
 import tkinter as tk
 from intelligence import recognize_user
 from images import take_photo
+from bem_vindo import bemVindo
 
 def autenticacao():
     def autentica_Click():
@@ -12,7 +13,7 @@ def autenticacao():
         redirect_user(user)
 
     def redirect_user(user):
-        print(user)
+        bemVindo(user[1], user[2])
 
     janela = tk.Tk()
     janela.title("Sistema de Autenticação") #titulo janela
@@ -30,3 +31,4 @@ def autenticacao():
     bt.place(x=20, y=200)
     #=====================/BOTÃO=======================
     janela.mainloop()
+    

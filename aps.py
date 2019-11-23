@@ -63,10 +63,14 @@ lb.place(x=140, y=150)
 bt = tk.Button(janela, width = 50, text = "Autenticar", command = autentica_Click )
 bt.place(x=20, y=200)
 #===============/Botão 2=================
-
 #===============Botão 3=================
-
-bt = tk.Button(janela, width = 50, text = "Fechar Aplicação", command = fecha_Click )
+bt = tk.Button(janela, width = 50, text = "Apagar tudo", command = drop_all )
 bt.place(x=20, y=300)
 #===============/Botão 3=================
+
+#===============Botão 4=================
+
+bt = tk.Button(janela, width = 50, text = "Fechar Aplicação", command = fecha_Click )
+bt.place(x=20, y=400)
+#===============/Botão 4=================
 janela.mainloop()
