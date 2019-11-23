@@ -1,4 +1,5 @@
 import psycopg2
+
 DB_NAME = "chmahdbn"
 DB_USER = "chmahdbn"
 DB_PASS = "5Mi_DUa8WTwqrYPxExWLhb59Iegz8QU2"
