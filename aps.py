@@ -1,31 +1,49 @@
 #coding: utf8
 import tkinter as tk
+import os
 import sys
 from cadastro import Cadastro
 from autentica import autenticacao
+from db_interaction.drop_delete import drop_table
+import shutil
 
 #==============Function_cadastra 1==============
 
 def cadastra_Click ():
     Cadastro()
     
-
 #==============/Fuunction_cadastra 1==============
 
 #==============Function autentica 2==============
 
 def autentica_Click ():
     autenticacao()
-    
 
 #==============/Function autentica 2==============
 
-#==============Function fecha 3==============
+#==============Function Apagar Tudo 3==============
+
+def drop_all():
+
+    drop_table
+
+    if os.path.isdir('users'):
+        shutil.rmtree('users')
+    
+    if os.path.isdir('backup'):
+        shutil.rmtree('backup')
+
+    print('Tudo foi apagado')
+
+#==============/Function Apagar Tudo 3==============
+
+#==============Function fecha 4==============
 
 def fecha_Click ():
     sys.exit()
 
-#==============/Function fecha 3==============
+#==============/Function fecha 4==============
+
 janela = tk.Tk()
 janela.title("Sistema de Autenticação") #titulo janela
 #janela["bg"] = "null"  #background
