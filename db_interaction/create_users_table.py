@@ -1,5 +1,5 @@
 from psycopg2 import DatabaseError
-from connector import conn
+from db_interaction.connector import conn
 
 cur = conn.cursor()
 

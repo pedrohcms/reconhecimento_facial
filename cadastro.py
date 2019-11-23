@@ -30,16 +30,16 @@ def Cadastro():
 
             crud.insert_record(name, var.get(), label)
 
+            conf = tk.Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
+            #pqp.place(x=10, y=10)
+            conf.pack(side='top', fill='x')    
+            print(campo.get())
+
             if len(os.listdir(folder)) == 0:
                 print('Error registering user: '+ name+', try again')
                 os.rmdir(folder) #We removed the folder that was created if the user does not register correctly
         else:
             print('User already registered! ')
-
-        conf = tk.Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
-        #pqp.place(x=10, y=10)
-        conf.pack(side='top', fill='x')    
-        print(campo.get())
 
     janela = tk.Tk()
     janela.title("Sistema de Cadastro") #titulo janela
