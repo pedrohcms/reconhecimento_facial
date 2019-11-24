@@ -92,7 +92,7 @@ def train_neural_network():
                  optmizer="adam",
                  metrics=['accuracy'])
 
-    model.fit(X, y, batch_size=5, epochs=3, validation_split=0.2)
+    model.fit(X, y, batch_size=5, epochs=5, validation_split=0.2)
     
     #Here we make the backup of the neural network
     model.save(os.path.join('backup', 'model.h5'))
