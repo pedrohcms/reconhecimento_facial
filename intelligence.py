@@ -11,11 +11,14 @@ from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
 from db_interaction import crud
 
+if not os.path.isdir('users'):
+    os.mkdir('users')
+
 CATEGORIES = os.listdir('users')
 
 #Load the images from the users folder and create the data for model training
 def create_training_data():
-    
+
     dirs = './users/'
     training_data = []
 
@@ -85,13 +88,11 @@ def train_neural_network():
     model.add(Dense(len(CATEGORIES)))
     model.add(Activation('sigmoid'))
 
-    #sparse_categorical_crossentropy será usada quando tivermos mais de duas pessoas
-    #utilizei binary_crossentropy pois só tinha duas classes diferentes
     model.compile(loss="sparse_categorical_crossentropy",
                  optmizer="adam",
                  metrics=['accuracy'])
 
-    model.fit(X, y, batch_size=6, epochs=5, validation_split=0.2)
+    model.fit(X, y, batch_size=5, epochs=5, validation_split=0.2)
     
     #Here we make the backup of the neural network
     model.save(os.path.join('backup', 'model.h5'))

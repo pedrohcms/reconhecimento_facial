@@ -3,8 +3,13 @@ import tkinter as tk
 import os
 import images
 from db_interaction import crud
+from intelligence import train_neural_network
+import shutil
 
 def Cadastro():
+
+    new_user = False
+
     def process_name(name):
         name = name.strip()
         name = name.upper()
@@ -30,16 +35,25 @@ def Cadastro():
 
             crud.insert_record(name, var.get(), label)
 
+            conf = tk.Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
+            conf.pack(side='top', fill='x')    
+            print(campo.get())
+
+            global new_user
+            new_user = True
+
             if len(os.listdir(folder)) == 0:
                 print('Error registering user: '+ name+', try again')
                 os.rmdir(folder) #We removed the folder that was created if the user does not register correctly
         else:
             print('User already registered! ')
 
-        conf = tk.Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
-        #pqp.place(x=10, y=10)
-        conf.pack(side='top', fill='x')    
-        print(campo.get())
+    def on_close():
+        global new_user
+        if new_user == True:
+            shutil.rmtree('backup')
+            train_neural_network()
+        janela.destroy()
 
     janela = tk.Tk()
     janela.title("Sistema de Cadastro") #titulo janela
@@ -70,4 +84,7 @@ def Cadastro():
     pri.place(x=170, y=250)
 
     #====================/OPÇÕES=======================
+
+    janela.protocol("WM_DELETE_WINDOW", on_close)
+
     janela.mainloop()

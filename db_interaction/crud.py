@@ -6,14 +6,14 @@ def insert_record (p_user_name, p_access_lvl, p_label):
     cur.execute("INSERT INTO userdata (user_name, access_lvl, label) VALUES(%s,%s,%s);",(p_user_name, p_access_lvl, p_label))
     conn.commit()
 
-    close_conn()
+    #close_conn()
 
 def select_record (p_label):
     cur.execute("Select * from userdata where label like %s;",(p_label,))
 
     records = cur.fetchall()
     
-    close_conn()
+    #close_conn()
 
     return records[0]
 
