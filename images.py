@@ -19,8 +19,6 @@ def take_pictures(name):
             print('Error')
             break
 
-        #TRESH_TRUNC was the best filter found, however there must be a better one
-        #ret, frame = cv2.threshold(frame, 127, 255, cv2.THRESH_TRUNC) #We apply binarization
         cv2.imshow('frame', frame)
         
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #We transform the image to grayscale
