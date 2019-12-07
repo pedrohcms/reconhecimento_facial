@@ -4,7 +4,7 @@ import os
 import sys
 from cadastro import Cadastro
 from autentica import autenticacao
-from db_interaction.drop_delete import drop_table
+from db_interaction.UsersMigration import UsersMigration
 import shutil
 
 # ==============Function_cadastra 1==============
@@ -28,7 +28,9 @@ def autentica_Click():
 
 def drop_all():
 
-    drop_table
+    migration = UsersMigration()
+
+    migration.down()
 
     if os.path.isdir('users'):
         shutil.rmtree('users')

@@ -9,7 +9,7 @@ import pickle
 import tensorflow as tf
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Activation, Flatten, Conv2D, MaxPooling2D
-from db_interaction import crud
+from db_interaction.User import User
 
 if not os.path.isdir('users'):
     os.mkdir('users')
@@ -19,7 +19,7 @@ CATEGORIES = os.listdir('users')
 #Load the images from the users folder and create the data for model training
 def create_training_data():
 
-    dirs = './users/'
+    dirs = 'users'
     training_data = []
 
     for category in CATEGORIES:
@@ -113,6 +113,8 @@ def recognize_user(frame):
 
     result = CATEGORIES[int(np.argmax(result))]
 
-    result = crud.select_record(result)
+    user = User()
+
+    result = user.select(result)
     
     return result

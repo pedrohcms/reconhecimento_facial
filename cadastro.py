@@ -2,7 +2,7 @@
 import tkinter as tk
 import os
 import images
-from db_interaction import crud
+from db_interaction.User import User
 from intelligence import train_neural_network
 import shutil
 
@@ -33,7 +33,8 @@ def Cadastro():
             os.mkdir(folder) #Create the directory that stores the user's images
             images.take_pictures(label) #Invokes the function that take pictures and save user's imagem
 
-            crud.insert_record(name, var.get(), label)
+            user = User() # Object of class User
+            user.insert(name, var.get(), label)
 
             conf = tk.Label(janela, text="USUARIO CADASTRADO COM SUCESSO", bg="green")
             conf.pack(side='top', fill='x')    
@@ -51,7 +52,8 @@ def Cadastro():
     def on_close():
         global new_user
         if new_user == True:
-            shutil.rmtree('backup')
+            if os.path.isdir('backup'):
+                shutil.rmtree('backup')
             train_neural_network()
         janela.destroy()
 

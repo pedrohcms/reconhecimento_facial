@@ -34,5 +34,3 @@ def bemVindo(nome, nivel):
         conf = tk.Label(janela, text="USUARIO NIVEL MINISTRO", bg="green")
         conf.pack(side='top', fill='x')    
     janela.mainloop()
-
-#bemVindo("Pedro Henrique Correa Mota da Silva", 3)
