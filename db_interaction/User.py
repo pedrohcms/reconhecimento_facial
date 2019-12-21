@@ -1,4 +1,5 @@
-from db_interaction.Connector import Connector
+from db_interaction.connector import Connector
+
 
 
 class User(Connector):
@@ -15,7 +16,7 @@ class User(Connector):
         self.cursor.execute(
             "Select * from userdata where label like %s;", (p_label,))
 
-        records = cursor.fetchall()
+        records = self.cursor.fetchall()
 
         return records[0]
 

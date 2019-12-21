@@ -1,5 +1,6 @@
 from psycopg2 import DatabaseError
-from db_interaction.Connector import Connector
+from db_interaction.connector import Connector
+
 
 class UsersMigration(Connector):
 
@@ -7,7 +8,7 @@ class UsersMigration(Connector):
         super().__init__()
         self.cursor = self.conn.cursor()
 
-    def up(self): # Run the migration against the database
+    def up(self):  # Run the migration against the database
         try:
             self.cursor.execute("""CREATE TABLE userdata (
                     id SERIAL PRIMARY KEY, 
@@ -19,7 +20,7 @@ class UsersMigration(Connector):
         except(Exception, DatabaseError) as error:
             print(error)
 
-    def down(self): # Undo the migration
+    def down(self):  # Undo the migration
         try:
             self.cursor.execute("DROP TABLE IF EXISTS userdata CASCADE;")
             print("Executed!")
