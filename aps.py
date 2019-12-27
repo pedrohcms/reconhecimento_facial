@@ -32,6 +32,8 @@ def drop_all():
 
     migration.down()
 
+    migration.up()
+
     if os.path.isdir('users'):
         shutil.rmtree('users')
 

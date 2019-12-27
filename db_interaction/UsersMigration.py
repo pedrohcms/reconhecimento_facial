@@ -1,6 +1,5 @@
 from psycopg2 import DatabaseError
-from db_interaction.connector import Connector
-
+from db_interaction.Connector import Connector
 
 class UsersMigration(Connector):
 

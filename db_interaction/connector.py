@@ -18,7 +18,12 @@ class Connector():
     def __init__(self):
         # The __init__ method connects with the database
         try:
-            self.conn = connect(database = Connector.DB_NAME, user = Connector.DB_USER, password = Connector.DB_PASS, host = Connector.DB_HOST, port = Connector.DB_PORT)
+            self.conn = connect(database=Connector.DB_NAME,
+                                user=Connector.DB_USER,
+                                password=Connector.DB_PASS,
+                                host=Connector.DB_HOST,
+                                port=Connector.DB_PORT)
+                                
             print("Database connected!")
 
         except (Exception, DatabaseError) as error:
