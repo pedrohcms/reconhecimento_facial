@@ -1,4 +1,4 @@
-from db_interaction.Connector import Connector
+from db_interaction.connector import Connector
 
 class User(Connector):
 

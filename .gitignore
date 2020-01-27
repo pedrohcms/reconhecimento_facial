@@ -5,3 +5,4 @@
 *.jpeg
 backup/model.h5
 .vscode/settings.json
+venv/
